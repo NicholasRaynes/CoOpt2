@@ -40,28 +40,16 @@ fun getCurrentConnectivityStatus(connectivityManager: ConnectivityManager): Conn
  * @return A flow that emits connection status changes.
  */
 fun Context.observeConnectivityAsFlow() = callbackFlow {
-    // Gets the ConnectivityManager service to manage network connectivity.
     val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-    // Creates a callback to handle network status changes and emit them to the flow.
-    val callback = NetworkCallback { connectionState -> trySend(connectionState) }
-
-    // Defines a network request that specifies the desired network capabilities (e.g., INTERNET).
+    val callback = NetworkCallback { trySend(it) }
     val networkRequest = NetworkRequest.Builder()
         .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
         .build()
 
-    // Registers the network callback with the ConnectivityManager to listen for network changes.
     connectivityManager.registerNetworkCallback(networkRequest, callback)
+    trySend(getCurrentConnectivityStatus(connectivityManager))
 
-    // Gets the current connectivity status and immediately emit it to the flow.
-    val currentState = getCurrentConnectivityStatus(connectivityManager)
-    trySend(currentState)
-
-    // Closes the flow when it's no longer needed by unregistering the network callback.
-    awaitClose {
-        connectivityManager.unregisterNetworkCallback(callback)
-    }
+    awaitClose { connectivityManager.unregisterNetworkCallback(callback) }
 }
 
 /**
