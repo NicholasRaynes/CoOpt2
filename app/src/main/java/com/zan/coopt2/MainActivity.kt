@@ -13,7 +13,6 @@ import com.zan.coopt2.Helper.currentConnectivityStatus
 import com.zan.coopt2.Helper.observeConnectivityAsFlow
 import com.zan.coopt2.Screens.AvailableScreen
 import com.zan.coopt2.Screens.UnavailableScreen
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * The main activity for the application. It sets up the Composable UI and checks connectivity status.
@@ -30,7 +29,6 @@ class MainActivity : ComponentActivity() {
 /**
  * A Composable function to check the connectivity status and display the appropriate screen.
  */
-@ExperimentalCoroutinesApi
 @Composable
 fun checkConnectivityStatus() {
     val connection by connectivityStatus()
@@ -48,7 +46,6 @@ fun checkConnectivityStatus() {
  * A Composable function that provides the current connectivity status as a State object.
  * @return A State object containing the current connection status.
  */
-@ExperimentalCoroutinesApi
 @Composable
 fun connectivityStatus(): State<ConnectionStatus> {
     val currentContext = LocalContext.current
