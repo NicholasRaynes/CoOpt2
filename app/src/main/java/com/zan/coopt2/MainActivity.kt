@@ -50,9 +50,7 @@ fun checkConnectivityStatus() {
 fun connectivityStatus(): State<ConnectionStatus> {
     val currentContext = LocalContext.current
 
-    // Creates a State object with an initial value based on the current connectivity status.
     return produceState(initialValue = currentContext.currentConnectivityStatus) {
-        // Observes changes in connectivity status by collecting values from the flow.
         currentContext.observeConnectivityAsFlow().collect { value = it }
     }
 }
