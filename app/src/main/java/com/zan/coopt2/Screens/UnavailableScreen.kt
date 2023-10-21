@@ -30,7 +30,7 @@ fun UnavailableScreen() {
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_wifi_off),
-            contentDescription = "wifi on",
+            contentDescription = "wifi off",
             modifier = Modifier.size(100.dp)
         )
 
