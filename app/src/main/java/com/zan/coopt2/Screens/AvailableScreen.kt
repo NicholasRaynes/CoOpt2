@@ -28,7 +28,7 @@ import com.zan.coopt2.R
 @Composable
 fun AvailableScreen() {
     Box(
-        modifier = Modifier.fillMaxSize().background(color = Color(0xFF208733)), // Replace Color.Yellow with your desired background color
+        modifier = Modifier.fillMaxSize().background(color = Color(0xFF208733)),
         contentAlignment = Alignment.Center
     ) {
         Column(
